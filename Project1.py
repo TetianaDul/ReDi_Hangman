@@ -10,7 +10,7 @@ def play_game():
     incorrect_letters = []                                                           #creating an empty list for all the words that user inputed
     attempts = 8                                                                #user has 8 attempts
     guessed = False
-    word_display = "'_'" * 8                                                    #placeholder to display a word and guessed letters in it
+    word_display = "_" * len(word)                                                    #placeholder to display a word and guessed letters in it
 
     #start the game
     print("Hello there! Let's play some game!")
@@ -22,11 +22,7 @@ def play_game():
 
     while guessed is False and attempts > 0:
         guess = input('Please enter a letter: ').upper()
-        print(word_display)
         attempts -= 1
-        if word_display == word:
-            print('You have guessed the word ', word)
-            break
         if len(guess) == 1 and guess.isalpha():
             if guess in word:
                 if guess in correct_letters:
@@ -35,6 +31,14 @@ def play_game():
                 else:
                     print('You have guessed correctly! Letter '+ guess + ' is in the word)')
                     correct_letters.append(guess)
+                    list_word = list(word_display)
+                    indices = [i for i, letter in enumerate(word) if letter == guess]
+                    for index in indices:
+                        list_word[index] = guess
+                    word_display = "".join(list_word)
+                    print(word_display)
+                    if "_" not in word_display:
+                        guessed = True
             elif guess not in word:
                 if guess in incorrect_letters:
                     print('You have already tried this letter. Please try again')
@@ -46,6 +50,7 @@ def play_game():
             print('Incorrect input. Please try again')
             attempts += 1
         print('You have ', attempts, ' tries left')
+        print('\n')
 
     if guessed:
         print('You have guessed the word ', word,'! Great job, you won!')

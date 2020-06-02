@@ -8,14 +8,15 @@ def play_game():
     word = ran_words_get()                                                       #call the random word
     correct_letters = []                                                        #creating an empty list for the letters user will guess
     incorrect_letters = []                                                           #creating an empty list for all the words that user inputed
-    attempts = 8                                                                #user has 8 attempts
+    attempts = 8                                                                     #user has 8 attempts
     guessed = False
     word_display = "_" * len(word)                                                    #placeholder to display a word and guessed letters in it
 
     #start the game
     print("Hello there! Let's play some game!")
     print("You will need to guess a word. It contains 8 letters and it is a name of an animal")
-    print(word_display)
+    print("Word: ", word_display)
+    print(stages_hangman(attempts))
     print(word)
 
 
@@ -49,6 +50,9 @@ def play_game():
         else:
             print('Incorrect input. Please try again')
             attempts += 1
+
+        print(stages_hangman(attempts))
+        print(word_display)
         print('You have ', attempts, ' tries left')
         print('\n')
 
@@ -59,4 +63,99 @@ def play_game():
      print('The word you were trying to guess is ' + word)
 
 
+def stages_hangman(attempts):
+    stages = [  # final state: head, torso, both arms, and both legs
+                """
+                    --------
+                    |      |
+                    |      O
+                    |     /|\\
+                    |      |
+                    |     / \\
+                   ---
+                """,
+
+                """
+                   --------
+                   |      |
+                   |      O
+                   |     /|\\
+                   |      |
+                   |     / 
+                  ---
+                """,
+                # head, torso, both arms, and one leg
+                """
+                   --------
+                   |      |
+                   |      O
+                   |     /|\\
+                   |      |
+                   |      
+                  ---
+                """,
+                # head, torso, and both arms
+                """
+                   --------
+                   |      |
+                   |      O
+                   |     /|
+                   |      |
+                   |      
+                  ---
+                """,
+                # head, torso, and one arm
+                """
+                   --------
+                   |      |
+                   |      O
+                   |      |
+                   |      |
+                   |     
+                  ---
+                """,
+                # head, torso, and one arm
+                """
+                   --------
+                   |      |
+                   |      O
+                   |      |
+                   |      
+                   |     
+                  ---
+                """,
+                # head and torso
+                """
+                   --------
+                   |      |
+                   |      O
+                   |      
+                   |           
+                   |     
+                  ---
+                """,
+                # head
+                """
+                   --------
+                   |      |
+                   |      
+                   |    
+                   |      
+                   |     
+                  ---
+                """,
+                # initial empty state
+                """
+                   --------
+                   |      
+                   |      
+                   |    
+                   |      
+                   |     
+                  ---
+                """
+    ]
+    return stages[attempts]
+
 play_game()
+

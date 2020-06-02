@@ -24,6 +24,9 @@ def play_game():
         guess = input('Please enter a letter: ').upper()
         print(word_display)
         attempts -= 1
+        if word_display == word:
+            print('You have guessed the word ', word)
+            break
         if len(guess) == 1 and guess.isalpha():
             if guess in word:
                 if guess in correct_letters:

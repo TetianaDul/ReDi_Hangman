@@ -10,14 +10,16 @@ def play_game():
     incorrect_letters = []                                                           #creating an empty list for all the words that user inputed
     attempts = 8                                                                     #user has 8 attempts
     guessed = False
+    mistakes = 0
     word_display = "_" * len(word)                                                    #placeholder to display a word and guessed letters in it
 
     #start the game
     print("Hello there! Let's play some game!")
     print('You will need to guess a word. It contains ', len(word), ' letters, and it is a name of an animal.')
     print("Word: ", word_display)
-    print(stages_hangman(attempts))
-    print(word)
+    print(stages_hangman(mistakes))
+    print(word)                               #DELETE
+
 
 
 
@@ -37,24 +39,29 @@ def play_game():
                     for index in indices:
                         list_word[index] = guess
                     word_display = "".join(list_word)
-                    print(word_display)
+
                     if "_" not in word_display:
                         guessed = True
             elif guess not in word:
                 if guess in incorrect_letters:
                     print('You have already tried this letter. Please try again')
                     attempts += 1
+
+
                 else:
                  print('Letter ' + guess + ' is not in the word')
                  incorrect_letters.append(guess)
+                 mistakes += 1
+
         else:
             print('Incorrect input. Please try again')
             attempts += 1
 
-        print(stages_hangman(attempts))
+
         print(word_display)
+        print(stages_hangman(mistakes))
         print('You have ', attempts, ' tries left')
-        print('\n')
+        print('\n\n')
 
     if guessed:
         print('You have guessed the word ', word,'! Great job, you won!')
@@ -63,25 +70,25 @@ def play_game():
      print('The word you were trying to guess is ' + word)
 
 
-def stages_hangman(attempts):
+def stages_hangman(mistakes):
     stages = [
                 """
                     --------
-                    |      |
-                    |      O
-                    |     /|\\
-                    |      |
-                    |     / \\
+                    |      
+                    |      
+                    |     
+                    |      
+                    |     
                    ---
                 """,
 
                 """
                    --------
                    |      |
-                   |      O
-                   |     /|\\
-                   |      |
-                   |     / 
+                   |      
+                   |     
+                   |      
+                   |      
                   ---
                 """,
 
@@ -89,9 +96,29 @@ def stages_hangman(attempts):
                    --------
                    |      |
                    |      O
-                   |     /|\\
+                   |     
+                   |      
+                   |      
+                  ---
+                """,
+
+                """
+                   --------
+                   |      |
+                   |      O
                    |      |
                    |      
+                   |      
+                  ---
+                """,
+
+                """
+                   --------
+                   |      |
+                   |      O
+                   |      |
+                   |      |
+                   |     
                   ---
                 """,
 
@@ -101,16 +128,6 @@ def stages_hangman(attempts):
                    |      O
                    |     /|
                    |      |
-                   |      
-                  ---
-                """,
-
-                """
-                   --------
-                   |      |
-                   |      O
-                   |      |
-                   |      |
                    |     
                   ---
                 """,
@@ -119,8 +136,8 @@ def stages_hangman(attempts):
                    --------
                    |      |
                    |      O
-                   |      |
-                   |      
+                   |     /|\\
+                   |      |     
                    |     
                   ---
                 """,
@@ -128,34 +145,24 @@ def stages_hangman(attempts):
                 """
                    --------
                    |      |
-                   |      O
-                   |      
-                   |           
-                   |     
+                   |      0
+                   |     /|\\
+                   |      |
+                   |     /
                   ---
                 """,
 
                 """
                    --------
                    |      |
-                   |      
-                   |    
-                   |      
-                   |     
-                  ---
-                """,
-
-                """
-                   --------
-                   |      
-                   |      
-                   |    
-                   |      
-                   |     
+                   |      0
+                   |     /|\\
+                   |      | 
+                   |     /|\\ 
                   ---
                 """
     ]
-    return stages[attempts]
+    return stages[mistakes]
 
 play_game()
 

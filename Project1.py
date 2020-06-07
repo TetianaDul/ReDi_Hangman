@@ -1,7 +1,7 @@
 import random                                                                   #Get the word that the player would have to guess
 
 def ran_words_get():
-    words_list = ['SQUIRREL', 'ELEPHANT', 'ANTELOPE', 'KANGAROO', 'CAPYBARA']
+    words_list = ['SQUIRREL', 'ELEPHANT', 'ANTELOPE', 'KANGAROO', 'BISON', 'CAMEL', 'HIPPO', 'HORSE', 'MONKEY', 'TURTLE', 'WOMBAT', 'ALPACA', 'RABBIT', 'JAGUAR']
     return random.choice(words_list)                                            #the game will be randomly choosing from the list of words
 
 def play_game():
@@ -14,7 +14,7 @@ def play_game():
 
     #start the game
     print("Hello there! Let's play some game!")
-    print("You will need to guess a word. It contains 8 letters and it is a name of an animal")
+    print('You will need to guess a word. It contains ', len(word), ' letters, and it is a name of an animal.')
     print("Word: ", word_display)
     print(stages_hangman(attempts))
     print(word)
@@ -64,7 +64,7 @@ def play_game():
 
 
 def stages_hangman(attempts):
-    stages = [  # final state: head, torso, both arms, and both legs
+    stages = [
                 """
                     --------
                     |      |
@@ -84,7 +84,7 @@ def stages_hangman(attempts):
                    |     / 
                   ---
                 """,
-                # head, torso, both arms, and one leg
+
                 """
                    --------
                    |      |
@@ -94,7 +94,7 @@ def stages_hangman(attempts):
                    |      
                   ---
                 """,
-                # head, torso, and both arms
+
                 """
                    --------
                    |      |
@@ -104,7 +104,7 @@ def stages_hangman(attempts):
                    |      
                   ---
                 """,
-                # head, torso, and one arm
+
                 """
                    --------
                    |      |
@@ -114,7 +114,7 @@ def stages_hangman(attempts):
                    |     
                   ---
                 """,
-                # head, torso, and one arm
+
                 """
                    --------
                    |      |
@@ -124,7 +124,7 @@ def stages_hangman(attempts):
                    |     
                   ---
                 """,
-                # head and torso
+
                 """
                    --------
                    |      |
@@ -134,7 +134,7 @@ def stages_hangman(attempts):
                    |     
                   ---
                 """,
-                # head
+
                 """
                    --------
                    |      |
@@ -144,7 +144,7 @@ def stages_hangman(attempts):
                    |     
                   ---
                 """,
-                # initial empty state
+
                 """
                    --------
                    |      
